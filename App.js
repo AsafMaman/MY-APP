@@ -1,15 +1,36 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import ReduxNavigation from './src/Navigation/ReduxNavigation'
+import createStore from './src/store'
+import {Provider} from 'react-redux'
+
+const store=createStore()
+
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props)
+    this.state={fontsAreLoaded:false}
+  }
+  async componentWillMount() {
+    await Expo.Font.loadAsync({
+      'Roboto': require('native-base/Fonts/Roboto.ttf'),
+      'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+    });
+    this.setState({fontsAreLoaded: true});
+  }
+
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+    if(this.state.fontsAreLoaded)
+      return (
+        <Provider store={store}>
+          <View style={styles.container}>
+            <ReduxNavigation/>
+          </View>
+        </Provider>
+      )
+    else
+      return (<View><Text>Loading...</Text></View>)
   }
 }
 
@@ -17,7 +38,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 });

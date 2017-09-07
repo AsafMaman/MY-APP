@@ -1,16 +1,16 @@
 import React from 'react'
 import * as ReactNavigation from 'react-navigation'
 import {connect} from 'react-redux'
-import AppNavigation from './AppNavigation'
+import AppNavigator from './AppNavigator'
 
-function ReduxNavigation(props){
+function ReduxNavigator(props){
     const {dispatch,nav} =props
     const navigation=ReactNavigation.addNavigationHelpers({
         dispatch,
         state:nav
     })
-    return <AppNavigation navigation={navigation}/>
+    return <AppNavigator navigation={navigation}/>
 }
 
 const mapStateToProps=state=>({nav:state.nav})
-export default connect(mapStateToProps)(ReduxNavigation)
+export default connect(mapStateToProps)(ReduxNavigator)

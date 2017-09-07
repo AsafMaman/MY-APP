@@ -4,11 +4,11 @@ import HomeScreen from '../Containers/HomeScreen'
 
 
 const DrawerStack=DrawerNavigator({
-    home:{screen:HomeScreen}
+    Home:{screen:HomeScreen}
 })
 
 const RootNav=StackNavigator({
-    login:{screen:LoginScreen},
+    Login:{screen:LoginScreen},
     drawerStack:{screen:DrawerStack}
 },
 {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import ReduxNavigation from './src/Navigation/ReduxNavigation'
+import ReduxNavigator from './src/Navigation/ReduxNavigator'
 import createStore from './src/store'
 import {Provider} from 'react-redux'
 
@@ -25,7 +25,7 @@ export default class App extends React.Component {
       return (
         <Provider store={store}>
           <View style={styles.container}>
-            <ReduxNavigation/>
+            <ReduxNavigator/>
           </View>
         </Provider>
       )

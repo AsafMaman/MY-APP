@@ -11,7 +11,16 @@ class LoginScreen extends Component{
             <View style={styles.container}>
               <Content>
               <Button style={styles.btn}
-              onPress={() => this.props.navigation.dispatch({type:'Home'})}
+              /* onPress={() => this.props.navigation.navigate('Home')} */
+              //onPress={() => this.props.navigation.navigate('drawerStack')}
+              onPress={() => this.props.navigation.dispatch({
+                type: 'Navigate',
+                routeName: 'drawerStack',
+                action: {
+                  type: 'Navigate',
+                  routeName: 'Home',
+                },
+              })}
                 >
                       <Text>Login</Text>
                     </Button>

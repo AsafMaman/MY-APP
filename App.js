@@ -1,15 +1,15 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import ReduxNavigator from './src/Navigation/ReduxNavigator'
-import createStore from './src/store'
-import {Provider} from 'react-redux'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import ReduxNavigator from './src/Navigation/ReduxNavigator';
+import createStore from './src/store';
+import {Provider} from 'react-redux';
 
-const store=createStore()
+const store=createStore();
 
 
 export default class App extends React.Component {
   constructor(props){
-    super(props)
+    super(props);
     this.state={fontsAreLoaded:false}
   }
   async componentWillMount() {

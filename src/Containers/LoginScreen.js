@@ -1,87 +1,87 @@
-import React,{Component} from 'react'
-import {View,Text,StyleSheet,Dimensions} from 'react-native'
-import {Container,Header,Body,Footer,Left,Right,Button,Title,Content,FooterTab,Icon,Image,background,fi} from 'native-base'
+import React,{Component} from 'react';
+import {NavigationActions} from 'react-navigation';
+import {View,StyleSheet,Dimensions} from 'react-native';
+import {Container,Header,Content,Form,Item,Input,Button,Text,Icon} from 'native-base';
+import { Field, reduxForm } from 'redux-form';
+
 
 
 class LoginScreen extends Component{
 
+    login=()=>{  
+      const navigationAction=NavigationActions.navigate({
+        routeName:'drawerStack',
+        //to navigate to sub routere.
+        // params:{},
+        // action:NavigationActions.navigate({routeName:'Home'})
+      });
+      this.props.navigation.dispatch(navigationAction);
+    }
+
+    loginField=(props) =>{
+      const {input}=props;
+      return(
+        <Item>
+          <Input {...props}/>
+        </Item>
+      )
+    }
+    
     render(){
-        return(
-            <Container>
+          return(
             <View style={styles.container}>
-              <Content>
-              <Button style={styles.btn}
-              /* onPress={() => this.props.navigation.navigate('Home')} */
-              //onPress={() => this.props.navigation.navigate('drawerStack')}
-              onPress={() => this.props.navigation.dispatch({
-                type: 'Navigate',
-                routeName: 'drawerStack',
-                action: {
-                  type: 'Navigate',
-                  routeName: 'Home',
-                },
-              })}
-                >
+              <View style={styles.logoContainer}>
+                <Icon name='lock' style={styles.icon} />
+              </View>
+              <View style={styles.contentContainer}>
+                  <Form>
+                    <Item>
+                      <Field name="userName" placeholder="Username" component={this.loginField} type="text"/>
+                    </Item>
+                      <Item>
+                        <Input placeholder="Password"/>
+                      </Item>
+                    <View style={styles.buttonContainer}>
+                    <Button block onPress={this.login}>
                       <Text>Login</Text>
                     </Button>
-              </Content>
+                  </View>
+                </Form>
+              </View>
             </View>
-          </Container>
-    //     <Container>
-    //     <View style={styles.container}>
-    //       <Content>
-    //         <Image source={background} style={styles.shadow}>
-    //           <View style={styles.bg}>
-    //             <Field name="email" component={this.renderInput} />
-    //             <Field name="password" component={this.renderInput} />
-    //             <Button
-    //               style={styles.btn}
-    //               onPress={() => this.props.navigation.navigate("Home")}
-    //             >
-    //               <Text>Login</Text>
-    //             </Button>
-    //           </View>
-    //         </Image>
-    //       </Content>
-    //     </View>
-    //   </Container>
         )
     }
 }
 
-const deviceHeight = Dimensions.get('window').height;
+const styles=StyleSheet.create({
+    container:{
+      flexDirection:'column',
+      flex:1,
+    },
+    logoContainer:{
+      flexDirection:'column',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flex:1,
+      backgroundColor:'red'
+    },
+    icon:{
+      fontSize:140,
+      color:'#fff'
+    },
+    contentContainer:{
+      flexDirection:'column',
+      flex:2,
+      marginTop:20
+    },
+    buttonContainer:{
+      margin:20
+    }
+})
 
-const styles = StyleSheet.create({
-    container: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        backgroundColor: '#FBFAFA',
-      },
-      shadow: {
-        flex: 1,
-        width: null,
-        height: null,
-      },
-      bg: {
-        flex: 1,
-        marginTop: deviceHeight / 1.75,
-        paddingTop: 20,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingBottom: 30,
-        bottom: 0,
-      },
-      input: {
-        marginBottom: 20,
-      },
-      btn: {
-        marginTop: 20,
-        alignSelf: 'center',
-      },
-  });
+LoginForm=reduxForm({
+  form:'login'
+})(LoginScreen)
   
-
-export default LoginScreen
+export default LoginForm
+//export default LoginScreen

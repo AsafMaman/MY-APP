@@ -61,11 +61,11 @@ const DrawerStack = DrawerNavigator({
   const LoginStack = StackNavigator({
     loginScreen: { screen: LoginScreen },
   }, {
-    headerMode: 'float',
-    navigationOptions: {
-      headerStyle: {backgroundColor: 'red'},
-      title: 'You are not logged in'
-    }
+    headerMode: 'none',
+    // navigationOptions: {
+    //   headerStyle: {backgroundColor: 'red'},
+    //   title: 'You are not logged in'
+    // }
   })
   
   // Manifest of possible screens

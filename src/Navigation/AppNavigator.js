@@ -5,12 +5,10 @@ import HomeScreen from '../Containers/HomeScreen';
 import AboutScreen from '../Containers/AboutScreen';
 import SideBar from '../Components/SideBar'
 
-
 export const routes={
   Home: { screen: HomeScreen,title:"Home",icon:"home"},
-  About: { screen: AboutScreen,title:"About",icon:"home"},
+  About: { screen: AboutScreen,title:"About",icon:"information-circle"},
 };
-
 
 // drawer stack
 const DrawerStack = DrawerNavigator(

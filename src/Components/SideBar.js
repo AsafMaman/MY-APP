@@ -1,17 +1,18 @@
 import React,{Component} from 'react'
 import { AppRegistry, Image, StatusBar } from "react-native";
 import {NavigationActions} from 'react-navigation'
-import { Container, Content, Text, List, ListItem,Icon } from "native-base";
-import {routes as temp} from '../Navigation/AppNavigator'
-const routes = ["Home", "About", "Profile"];
+import { Container,Header,Body,Right,Left ,Content, Text, List, ListItem,Icon,Title } from "native-base";
+import {routes} from '../Navigation/AppNavigator'
+// const routes = ["Home", "About", "Profile"];
 export default class SideBar extends Component {
     constructor(props) {
         super(props);
-        const t1=Object.values(temp);
+        let routesObjects=Object.keys(routes).map(x=>{return {route:x,title:routes[x].title,icon:routes[x].icon}})
         this.state = {
-          routes:Object.values(temp)
+          routes:routesObjects
         };
-      }
+    }
+    
     navigate=(routeName)=>{  
         const navigationAction=NavigationActions.navigate({
           routeName:routeName,
@@ -20,45 +21,46 @@ export default class SideBar extends Component {
           // action:NavigationActions.navigate({routeName:'Home'})
         });
         this.props.navigation.dispatch(navigationAction);
-      }
-  render() {
-    return (
-      <Container>
-        <Content>
-          {/* <Image
-            source={{
-              uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/drawer-cover.png"
-            }}
-            style={{
-              height: 120,
-              alignSelf: "stretch",
-              justifyContent: "center",
-              alignItems: "center"
-            }}>
-            <Image
-              square
-              style={{ height: 80, width: 70 }}
-              source={{
-                uri: "https://github.com/GeekyAnts/NativeBase-KitchenSink/raw/react-navigation/img/logo.png"
-              }}
-            />
-          </Image> */}
-          <List
-            dataArray={this.state.routes}
-            renderRow={data => {
-              return (
-                <ListItem
-                  button
-                  onPress={() => this.navigate(data)}>
-                  {/* onPress={() => this.props.navigation.navigate(data)}> */}
-                  <Icon name={data.icon}/>
-                  <Text>{data.title}</Text>
-                </ListItem>
-              );
-            }}
-          />
-        </Content>
-      </Container>
-    );
-  }
+    }
+
+    closeDrawer=()=>{  
+        const navigationAction=NavigationActions.navigate({
+          routeName:'DrawerClose',
+        });
+        this.props.navigation.dispatch(navigationAction);
+    }
+    render() {
+        return (
+            <Container>
+                <Header>
+                    <Body>
+                        <Title>Menu</Title>
+                    </Body>
+                    <Right>
+                        <Icon name="close" onPress={this.closeDrawer}/>
+                    </Right>
+                </Header>
+                <Content>
+                    <List
+                        dataArray={this.state.routes}
+                        renderRow={data => {
+                            return (
+                                <ListItem icon onPress={() => this.navigate(data.route)}>
+                                <Left>
+                                  <Icon name={data.icon} />
+                                </Left>
+                                <Body>
+                                  <Text>{data.title}</Text>
+                                </Body>
+                                <Right>
+                                  <Icon name="arrow-forward" />
+                                </Right>
+                              </ListItem>
+                            );
+                        }}
+                    />
+                </Content>
+            </Container>
+        );
+    }
 }

@@ -1,23 +1,21 @@
 import React,{Component} from 'react'
 import {View,Text} from 'react-native'
-import {Container,Header,Body,Footer,Left,Right,Button,Title,Content,FooterTab,Icon} from 'native-base'
+import {NavigationActions} from 'react-navigation'
+import {Container,Body,Footer,Left,Right,Button,Title,Content,FooterTab,Icon} from 'native-base'
+import Header from '../Components/Header'
+//import Header from '../Components/Header'
 
 class HomeScreen extends Component{
-
+  openDrawer=()=>{  
+    const navigationAction=NavigationActions.navigate({
+      routeName:'DrawerOpen',
+    });
+    this.props.navigation.dispatch(navigationAction);
+  }    
     render(){
         return(
             <Container>
-            <Header>
-              <Left>
-                <Button transparent>
-                  <Icon name='menu' />
-                </Button>
-              </Left>
-              <Body>
-                <Title>Home</Title>
-              </Body>
-              <Right />
-            </Header>
+              <Header title="Home" navigation={this.props.navigation}/>
             <Content>
               <Text>
                 Home screen.

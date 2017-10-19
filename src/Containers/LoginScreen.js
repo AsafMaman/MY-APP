@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import {NavigationActions} from 'react-navigation';
-import {View,StyleSheet,Dimensions} from 'react-native';
+import {View,StyleSheet,Dimensions,TextInput} from 'react-native';
 import {Container,Header,Content,Form,Item,Input,Button,Text,Icon} from 'native-base';
 import { Field, reduxForm } from 'redux-form';
 
@@ -19,11 +19,27 @@ class LoginScreen extends Component{
     }
 
     loginField=(props) =>{
-      const {input}=props;
+      //const {input,...inputProps}=props;
+      const {input,meta,...inputProps}=props
       return(
         <Item>
-          <Input {...props}/>
+          <Input 
+            {...inputProps}
+             onChangeText={input.onChange}
+             onBlur={input.onBlur}
+             onFocus={input.onFocus}
+             value={input.value}
+          />
         </Item>
+      //   <View>
+      //   <TextInput
+      //     {...inputProps}
+      //     onChangeText={input.onChange}
+      //     onBlur={input.onBlur}
+      //     onFocus={input.onFocus}
+      //     value={input.value}
+      //     />
+      // </View>
       )
     }
     
@@ -35,12 +51,9 @@ class LoginScreen extends Component{
               </View>
               <View style={styles.contentContainer}>
                   <Form>
-                    <Item>
-                      <Field name="userName" placeholder="Username" component={this.loginField} type="text"/>
-                    </Item>
-                      <Item>
-                        <Input placeholder="Password"/>
-                      </Item>
+                    <Field name="userName" placeholder="Username" component={this.loginField} type="text"/>
+                    <Field name="password" placeholder="Password" component={this.loginField} type="text"/>
+
                     <View style={styles.buttonContainer}>
                     <Button block onPress={this.login}>
                       <Text>Login</Text>

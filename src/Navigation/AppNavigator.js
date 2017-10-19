@@ -1,82 +1,65 @@
+import React from 'react'
 import {StackNavigator,DrawerNavigator} from 'react-navigation';
 import LoginScreen from '../Containers/LoginScreen';
 import HomeScreen from '../Containers/HomeScreen';
 import AboutScreen from '../Containers/AboutScreen';
+import SideBar from '../Components/SideBar'
 
 
-// const DrawerStackNavigatior=DrawerNavigator({
-//     Home:{screen:HomeScreen}
-// })
-
-// const LoginStack = StackNavigator({
-//     Login:{screen:LoginScreen},
-//   }, {
-//     headerMode: 'float',
-//     navigationOptions: {
-//       headerStyle: {backgroundColor: 'red'},
-//       title: 'You are not logged in'
-//     }
-// })
-
-// const DrawerStack = StackNavigator({
-//     DrawerStackNav: { screen: DrawerStackNavigatior }
-//     }, {
-//     headerMode: 'float',
-//     navigationOptions: ({navigation}) => ({
-//       headerStyle: {backgroundColor: 'green'},
-//       title: 'Logged In to your app!',
-//       headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
-//     })
-// })
-
-// const RootNav=StackNavigator({
-//     Login:{screen:LoginStack},
-//     drawerStack:{screen:DrawerStack}
-// },
-// {
-//     headerMode:'none'
-// })
-
-// export default RootNav
+export const routes={
+  Home: { screen: HomeScreen,title:"Home",icon:"home"},
+  About: { screen: AboutScreen,title:"About",icon:"home"},
+};
 
 
 // drawer stack
-const DrawerStack = DrawerNavigator({
-    Home: { screen: HomeScreen },
-    About: { screen: AboutScreen},
-  })
+const DrawerStack = DrawerNavigator(
+  routes,
+  {
+    contentComponent:props => <SideBar {...props}/>
+  }
+)
   
-  const DrawerNavigation = StackNavigator({
+const DrawerNavigation = StackNavigator(
+  {
     DrawerStack: { screen: DrawerStack }
-  }, {
-    headerMode: 'float',
+  },
+  {
+    headerMode: 'none',//'float',
     navigationOptions: ({navigation}) => ({
       headerStyle: {backgroundColor: 'green'},
       title: 'Logged In to your app!',
     //   headerLeft: <Text onPress={() => navigation.navigate('DrawerOpen')}>Menu</Text>
     })
-  })
+  }
+)
   
   // login stack
-  const LoginStack = StackNavigator({
+const LoginStack = StackNavigator(
+  {
     loginScreen: { screen: LoginScreen },
-  }, {
+  },
+  {
     headerMode: 'none',
     // navigationOptions: {
     //   headerStyle: {backgroundColor: 'red'},
     //   title: 'You are not logged in'
     // }
-  })
+  }
+)
   
   // Manifest of possible screens
-  const RootNav = StackNavigator({
+const RootNav = StackNavigator(
+  {
     loginStack: { screen: LoginStack },
     drawerStack: { screen: DrawerNavigation }
-  }, {
+  },
+  {
     // Default config for all screens
     headerMode: 'none',
     title: 'Main',
     initialRouteName: 'loginStack'
-  })
+  }
+)
   
-  export default RootNav
+export default RootNav

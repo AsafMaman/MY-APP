@@ -1,23 +1,14 @@
 import React,{Component} from 'react'
 import {View,Text} from 'react-native'
-import {Container,Header,Body,Footer,Left,Right,Button,Title,Content,FooterTab,Icon} from 'native-base'
+import {Container,Body,Footer,Left,Right,Button,Title,Content,FooterTab,Icon} from 'native-base'
+import Header from '../Components/Header'
 
 class AboutScreen extends Component{
 
     render(){
         return(
             <Container>
-            <Header>
-              <Left>
-                <Button transparent>
-                  <Icon name='menu' />
-                </Button>
-              </Left>
-              <Body>
-                <Title>About</Title>
-              </Body>
-              <Right />
-            </Header>
+            <Header title="About" navigation={this.props.navigation}/>
             <Content>
               <Text>
                 About screen.
